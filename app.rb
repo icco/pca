@@ -1,23 +1,18 @@
-require 'rubygems'
-require 'sinatra'
-require 'stripe'
+require "rubygems"
+require "bundler"
+Bundler.require(:default, ENV["RACK_ENV"] || :development)
 
-Stripe.api_key = "STRIPE_API_PRIVATE_KEY"
-set :views, File.dirname(__FILE__) + "/views"
-
-def is_number?(i)
-  true if Float(i) rescue false
-end
+Stripe.api_key = ENV["STRIPE_API_PRIVATE_KEY"]
 
 get "/" do
   erb :form
 end
 
 post "/pay" do
-  if is_number?(params[:amount].to_f)
-    amount = ((params[:amount].to_f)*100).to_i
+  value = (params[:amount].to_f * 100).to_i
+  if value >= 100
     @charge = Stripe::Charge.create(
-      :amount => amount,
+      :amount => value,
       :currency => "usd",
       :card => params[:stripeToken],
       :description => "test payment")
