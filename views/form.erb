@@ -11,20 +11,20 @@
         $('.submit-button').attr("disabled", "disabled");
 
         Stripe.createToken({
-            number: $('.card-number').val(),
-            cvc: $('.card-cvc').val(),
-            exp_month: $('.card-expiry-month').val(),
-            exp_year: $('.card-expiry-year').val()
+          number: $('.card-number').val(),
+          cvc: $('.card-cvc').val(),
+          exp_month: $('.card-expiry-month').val(),
+          exp_year: $('.card-expiry-year').val()
         }, stripeResponseHandler);
 
-      function stripeResponseHandler(status, response) {
-        if (response.error) {
-            alert("error");
+        function stripeResponseHandler(status, response) {
+          if (response.error) {
+            console.log(response.error);
             // show the errors on the form
             $(".payment-errors").text(response.error.message);
-			// re-enable the submit button after error
-			$('.submit-button').removeAttr('disabled');
-        } else {
+            // re-enable the submit button after error
+            $('.submit-button').removeAttr('disabled');
+          } else {
             var form$ = $("#payment-form");
             // token contains id, last4, and card type
             var token = response['id'];
@@ -32,8 +32,8 @@
             form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
             // and submit
             form$.get(0).submit();
+          }
         }
-      }
 
         // prevent the form from submitting with the default action
         return false;
