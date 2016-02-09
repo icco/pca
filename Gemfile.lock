@@ -1,8 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    daemons (1.2.3)
     domain_name (0.5.20160128)
       unf (>= 0.0.5, < 1.0.0)
+    eventmachine (1.0.9.1)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     json (1.8.3)
@@ -22,6 +24,10 @@ GEM
     stripe (1.36.0)
       json (~> 1.8.1)
       rest-client (~> 1.4)
+    thin (1.6.4)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (~> 1.0)
     tilt (2.0.2)
     unf (0.1.4)
       unf_ext
@@ -33,6 +39,7 @@ PLATFORMS
 DEPENDENCIES
   sinatra
   stripe
+  thin
 
 BUNDLED WITH
    1.11.2
