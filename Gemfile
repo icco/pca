@@ -1,5 +1,6 @@
-source :rubygems
-source "https://code.stripe.com"
+source "https://rubygems.org"
 
-gem "sinatra", "1.0"
+ruby "2.3.0"
+
+gem "sinatra"
 gem "stripe"
